@@ -14,7 +14,7 @@ def Email_Vaid(Email_input):
     if PWD_USR_Valid(Email_input) or '@' not in Email_input:
         return False
     
-@app.route('/signup', methods=['POST','GET'])
+@app.route('/signup', methods=['POST'])
 def welcome():
     username = request.form['username']
     email = request.form['email']
@@ -24,6 +24,14 @@ def welcome():
     if PWD_USR_Valid(username) == False:
         error_username = "Enter a vaild username"
         return render_template('index.html', error_username=error_username, username=username, email=email)
+    
+    if PWD_USR_Valid(password) == False:
+        error_password = "Enter a valid Password"
+        return render_template('index.html',username=username, email=email, error_password=error_password)
+    
+    if password != verify_password:
+        error_verify_password = "Password doesn't match"
+        return render_template('index.html',username=username,email=email, error_verify_password=error_verify_password)
     
     if len(email) >= 1:
         if Email_Vaid(email) == False:
