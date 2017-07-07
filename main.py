@@ -11,7 +11,7 @@ def PWD_USR_Valid(user_input):
         return False
 
 def Email_Vaid(Email_input):
-    if PWD_USR_Valid(Email_input) or '@' not in Email_input:
+    if PWD_USR_Valid(Email_input) or '@' not in Email_input or '.' not in Email_input:
         return False
     
 @app.route('/signup', methods=['POST'])
